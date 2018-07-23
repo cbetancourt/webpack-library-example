@@ -1,4 +1,5 @@
 const path = require('path');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 export default () => (
     {
@@ -12,14 +13,9 @@ export default () => (
             // libraryExport: 'default',
             library: 'webpackNumbers'
         },
-        externals: {
-            'lodash': {
-                commonjs: 'lodash',
-                commonjs2: 'lodash',
-                amd: 'lodash',
-                root: '_'
-            }
-        },
+        plugins: [
+            new LodashModuleReplacementPlugin
+        ],
         module: {
             rules: [
                 {

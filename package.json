@@ -1,11 +1,16 @@
 {
   "name": "y",
+  "private": true,
   "version": "1.0.0",
   "description": "An example of how to author libraries using webpack",
   "main": "dist/webpack-numbers.js",
   "scripts": {
-    "build:browser": "webpack && cp dist/webpack-numbers.js examples/browser",
-    "build:node": "webpack && cp dist/webpack-numbers.js examples/node/ && node examples/node/example.js",
+    "postinstall": "yarn build",
+    "build": "webpack",
+    "postbuild": "npm-run-all example:create:browser example:create:node example:run:node",
+    "example:create:browser": "cp dist/webpack-numbers.js examples/browser",
+    "example:create:node": "cp dist/webpack-numbers.js examples/node",
+    "example:run:node": "DEBUG=example node examples/node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,13 +22,17 @@
   "author": "pksjce",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
+    "chalk": "2.4.1",
+    "debug": "3.1.0",
     "eslint": "^3.9.1",
     "eslint-loader": "^1.6.1",
-    "lodash": "^4.16.6",
+    "lodash": "^4.17.10",
+    "lodash-webpack-plugin": "0.11.5",
+    "npm-run-all": "^4.1.3",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.12"
   }

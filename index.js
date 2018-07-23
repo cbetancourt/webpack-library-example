@@ -1,7 +1,7 @@
-import _ from 'lodash';
+import reduce from 'lodash/reduce';
 import numRef from './ref.json';
 
-function createTransalator() {
+function createTranslator() {
     return {
         numtoword: (num) => {
             return num < 0 || num > 5 ? 'This is a failure' : converttoword(num);
@@ -14,15 +14,15 @@ function createTransalator() {
 }
 
 const converttoword = (num) => {
-    return _.reduce(numRef, (accum, ref) => {
+    return reduce(numRef, (accum, ref) => {
         return ref.num === num ? ref.word : accum;
     }, '');
 };
 
 const converttonum = (word) => {
-    return _.reduce(numRef, (accum, ref) => {
+    return reduce(numRef, (accum, ref) => {
         return ref.word === word && word.toLowerCase() ? ref.num : accum;
     }, -1);
 };
 
-export default createTransalator();
+export default createTranslator();
